@@ -1,0 +1,5 @@
+2021-06-09 16:21:42.184  INFO 60668 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2021-06-09 16:21:42.320  INFO 60668 --- [main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
+2021-06-09 16:21:43.244  WARN 60668 --- [main] com.nowcoder.community.LoggerTests       : warn log
+2021-06-09 16:21:43.244 ERROR 60668 --- [main] com.nowcoder.community.LoggerTests       : error log
+2021-06-09 16:21:43.254  INFO 60668 --- [SpringContextShutdownHook] o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'applicationTaskExecutor'
