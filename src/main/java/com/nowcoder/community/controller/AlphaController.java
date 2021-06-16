@@ -1,14 +1,17 @@
 package com.nowcoder.community.controller;
 
 import com.nowcoder.community.service.AlphaService;
+import com.nowcoder.community.util.CommunityUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.*;
@@ -145,4 +148,45 @@ public class AlphaController {
 
         return list;
     }
+
+    @RequestMapping(path = "/cookie/set", method = RequestMethod.GET)
+    @ResponseBody
+    public String setCookie(HttpServletResponse httpServletResponse) {
+        // 创建对象
+        Cookie cookie = new Cookie("code", CommunityUtil.generateUUID());
+        // 指定路径，设置cookie有效范围,只有这个范围发送的时候才会发送Cookie
+        cookie.setPath("/community");
+        // 设置cookie生存时间，以秒为单位
+        cookie.setMaxAge(60 * 10);
+        // 发送cookie
+        httpServletResponse.addCookie(cookie);
+        return "set cookie";
+    }
+
+    // 查看Cookie,通过@CookieValue注解，可以在服务端得到Cookie，通过里面的变量值来得到某一个Cookie的Value值，不然那得到是头携带的所有的Cookie
+    @RequestMapping(path = "/cookie/get", method = RequestMethod.GET)
+    @ResponseBody
+    public String getCookie(@CookieValue("code") String code) {
+        System.out.println(code);
+        return "get cookie";
+    }
+
+    // Session示例
+    @RequestMapping(path = "/session/set", method = RequestMethod.GET)
+    @ResponseBody
+    public String setSession(HttpSession httpSession) {
+        httpSession.setAttribute("id",1);
+        httpSession.setAttribute("name","Test");
+        return "set Session";
+    }
+    // 从session中取值
+    @RequestMapping(path = "/session/get", method = RequestMethod.GET)
+    @ResponseBody
+    public String getSession(HttpSession httpSession) {
+        System.out.println(httpSession.getAttribute("id"));
+        System.out.println(httpSession.getAttribute("name"));
+        return "get Session";
+    }
+    //Session可以存任意的数据，而Cookie一般只能存String
+
 }
