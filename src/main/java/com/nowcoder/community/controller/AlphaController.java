@@ -189,4 +189,13 @@ public class AlphaController {
     }
     //Session可以存任意的数据，而Cookie一般只能存String
 
+    // Ajax实例
+    @RequestMapping(path = "/ajax", method = RequestMethod.POST)
+    // 异步请求是不返回网页的，所以是返回body
+    @ResponseBody
+    public String testAjax(String name, int age) {
+        System.out.println(name);
+        System.out.println(age);
+        return CommunityUtil.getJSONString(0, "ok");
+    }
 }

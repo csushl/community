@@ -17,6 +17,6 @@ public interface DiscussPostMapper {
     // 这个userId和上面是一样的功能
     int selectDiscussPostRows(@Param("userId") int userId);
 
-//    int insertDiscussPost(DiscussPost discussPost);
+    int insertDiscussPost(DiscussPost discussPost);
 
 }
